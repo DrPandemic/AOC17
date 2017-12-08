@@ -22,7 +22,7 @@ fn run(input: Container) -> i32 {
   let mut input_mut = input.clone();
   let mut seen: Vec<Container> = vec![];
 
-  'outer: loop {
+  let j = 'outer: loop {
     seen.push(input_mut.clone());
     i += 1;
     let (mut position, mut val) = (&input_mut).into_iter().enumerate().fold((0 as usize, 0 as i32), |(i, val), (i_curr, &val_curr)| {
@@ -38,14 +38,15 @@ fn run(input: Container) -> i32 {
       input_mut[position] += 1;
       val -= 1;
 
-      match (&seen).into_iter().find(|&elem| elem == &input_mut) {
-        Some(_) => break 'outer,
+      match (&seen).into_iter().enumerate().find(|&(_, elem)| elem == &input_mut) {
+        Some((j, _)) => break 'outer j as i32,
         _ => {}
       }
     }
-  }
+  };
 
-  i
+  println!("{:?} {} {}", seen, i, j);
+  i - j
 }
 
 fn main() {
