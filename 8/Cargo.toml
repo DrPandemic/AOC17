@@ -1,0 +1,6 @@
+[package]
+name = "day8"
+version = "0.1.0"
+authors = ["Jean-Samuel Aubry-Guzzi <js.aubry@shopify.com>"]
+
+[dependencies]
